@@ -1,0 +1,18 @@
+!!!5
+html
+  head
+    title #{title} - My Site
+    link(rel='stylesheet', href='/css/base.css')
+    link(rel='stylesheet', href='/css/skeleton.css')
+    link(rel='stylesheet', href='/css/layout.css')
+    link(rel='stylesheet', href='/css/custom.css')
+  body
+    header
+      h1 My Site
+    .container
+      .main-content
+        block content
+      .sidebar
+        block sidebar
+    footer
+      p Running on node with Express, Jade and Stylus
