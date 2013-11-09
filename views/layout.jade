@@ -1,18 +1,29 @@
 !!!5
 html
   head
-    title #{title} - My Site
+    title Thomas Ricouard - vCard
+    script(src="/js/")
+    script(src="/js/app.js")
+    script(type="text/javascript").
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-7738827-5']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    meta(name="google-site-verification", content="Y8-bAjyJTGWmEp_AlQkUegtg_Cpzc0am06XbCA7X3EM")
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1") 
+    meta(name="description", content="I was originally only a web developer (html, php, mysql...) but now, I also code in objective-C, I can do iOS and Mac OS X Apps !...")
+    meta(name="author", content="Thomas Ricouard")
+    meta(name="keywords", content="iOS, objective-C, cocoa, iOS, Android, Java, dev, Web, development")
     link(rel='stylesheet', href='/css/base.css')
-    link(rel='stylesheet', href='/css/skeleton.css')
-    link(rel='stylesheet', href='/css/layout.css')
+    link(rel='stylesheet', href='/css/skeleton/skeleton.css')
     link(rel='stylesheet', href='/css/custom.css')
   body
-    header
-      h1 My Site
     .container
-      .main-content
-        block content
-      .sidebar
-        block sidebar
-    footer
-      p Running on node with Express, Jade and Stylus
+      include header
+      include tabs
+      block content

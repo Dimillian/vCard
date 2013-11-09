@@ -15,7 +15,7 @@ app.set('view engine', 'jade');
 app.use(express.logger());
 
 app.use(stylus.middleware({
-	src: __dirname + '/public/css',
+	src: __dirname + '/public',
 	compile: compile
 	}
 ));
@@ -23,9 +23,7 @@ app.use(stylus.middleware({
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
-	res.render('index', {
-		title : 'Home' 
-	})
+	res.render('index', {})
 });
 
 var port = process.env.PORT || 5000;
