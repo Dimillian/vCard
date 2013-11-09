@@ -16,7 +16,8 @@ app.use(express.logger());
 
 app.use(stylus.middleware({
 	src: __dirname + '/public',
-	compile: compile
+	compile: compile,
+	compress: true
 	}
 ));
 
