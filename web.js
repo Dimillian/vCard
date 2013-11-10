@@ -6,7 +6,22 @@ var nib = require('nib');
 var mongoose = require ("mongoose");
 var app = express();
 
-var jobs = require('./mongo.js').make(mongoose);
+var uristring =
+	process.env.MONGOLAB_URI ||
+	'mongodb://localhost/thomsricouardTimeline';
+
+mongoose.connect(uristring, function (err, res) {
+	if (err) {
+		console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+	} else {
+		console.log ('Succeeded connected to: ' + uristring);
+	}
+});
+
+var Job = require('./providers/jobProvider.js').JobProvider;
+var job = new Job();
+job.seed();
+
 
 function compile(str, path) {
 	return stylus(str)
@@ -23,21 +38,23 @@ app.use(stylus.middleware({
 	src: __dirname + '/public',
 	compile: compile,
 	compress: true
-}
+	}
 ));
 
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
-	jobs.find({}).exec(function(err, result) {
-		if (!err) {
-			res.render('index', {timeline: result })
-		}
-	})
+	job.findall(function(error, jobs){
+		res.render('index', {timeline: jobs})
+	});
 });
 
 app.get('/showcase.html', function (req, res) {
 	res.render('showcase/index', {})
+});
+
+app.get('/login.html', function(req, res) {
+ 	res.render('login', {})
 });
 
 var port = process.env.PORT || 5000;

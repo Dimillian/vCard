@@ -1,16 +1,7 @@
-function make (mongoose) {
-	var uristring =
-	process.env.MONGOLAB_URI ||
-	'mongodb://localhost/thomsricouardTimeline';
+var mongoose = require ("mongoose");
+var Job;
 
-	mongoose.connect(uristring, function (err, res) {
-		if (err) {
-			console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-		} else {
-			console.log ('Succeeded connected to: ' + uristring);
-		}
-	});
-
+JobProvider = function() {
 	var timelineSchema = new mongoose.Schema({
 		logo: {type: String, trim: true},
 		logoStyle: {type: String, trim: true},
@@ -20,9 +11,10 @@ function make (mongoose) {
 		time: {type: String, trime: true},
 		order: {type: Number}
 	});
+	Job = mongoose.model('thomasRicouardJob', timelineSchema);
+};
 
-	var Job = mongoose.model('thomasRicouardJob', timelineSchema);
-
+JobProvider.prototype.seed = function() {
 	Job.remove(function (err) {if (err) console.log ('Error on remove!')});
 
 	var mySeeenJob = new Job ({
@@ -91,7 +83,12 @@ function make (mongoose) {
 	sageJob1.save(function (err) {if (err) console.log ('Error on save!')});
 	ravenJob.save(function (err) {if (err) console.log ('Error on save!')});
 	sageJob2.save(function (err) {if (err) console.log ('Error on save!')});
+};
 
-	return Job;
-}
-exports.make = make;
+JobProvider.prototype.findall = function(callback) {
+	Job.find({}).exec(function(err, result) {
+		callback(err, result);
+	})
+};
+
+exports.JobProvider = JobProvider;
