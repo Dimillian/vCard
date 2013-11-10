@@ -1,7 +1,11 @@
+var http = require ('http');
 var express = require('express');
 var stylus = require('stylus');
 var nib = require('nib');
+var mongoose = require ("mongoose");
 var app = express();
+
+require('./mongo.js').make(mongoose);
 
 function compile(str, path) {
   return stylus(str)
