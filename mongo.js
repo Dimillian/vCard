@@ -21,7 +21,7 @@ function make (mongoose) {
 		order: {type: Number}
 	});
 
-	var Job = mongoose.model('job', timelineSchema);
+	var Job = mongoose.model('thomasRicouardJob', timelineSchema);
 
 	Job.remove(function (err) {if (err) console.log ('Error on remove!')});
 
