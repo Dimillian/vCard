@@ -13,6 +13,7 @@ function make (mongoose) {
 
 	var timelineSchema = new mongoose.Schema({
 		logo: {type: String, trim: true},
+		logoStyle: {type: String, trim: true},
 		company: {type: String, trim: true},
 		job: {type: String, trim: true},
 		url: {type: String, trim: true},
@@ -26,6 +27,7 @@ function make (mongoose) {
 
 	var mySeeenJob = new Job ({
 		logo: "/images/myseeen.png",
+		logoStyle: "margin-top: 10px; margin-right: 25px; margin-left: 15px",
 		company: "MySeeen",
 		job: "Co-Founder, iOS Dev",
 		url: "http://www.myseeenapp.com",
@@ -35,6 +37,7 @@ function make (mongoose) {
 
 	var googleJob = new Job ({
 		logo: "/images/google.png",
+		logoStyle: "margin-top: 17px; margin-right: 10px",
 		company: "Google",
 		job: "iOS engineer",
 		url: "http://google.com",
@@ -44,6 +47,7 @@ function make (mongoose) {
 
 	var wayzupJob = new Job ({
 		logo: "/images/wayzup-logo.png",
+		logoStyle: "margin-top: 10px; margin-right: 10px",
 		company: "Wayz-Up",
 		job: "Mobile Development Manager",
 		url: "http://www.wayz-up.com",
@@ -53,6 +57,7 @@ function make (mongoose) {
 
 	var sageJob1 = new Job ({
 		logo: "/images/sage-logo.png",
+		logoStyle: "margin-top: 15px; margin-right: 10px;",
 		company: "Sage",
 		job: "Mobile Technologies Developer",
 		url: "http://sage.fr",
@@ -62,6 +67,7 @@ function make (mongoose) {
 
 	var ravenJob = new Job ({
 		logo: "/images/raven-logo.png",
+		logoStyle: "margin-top: 15px; margin-right: 30px",
 		company: "Raven",
 		job: "Co-Founder, Lead Developer",
 		url: "http://raven.io",
@@ -71,6 +77,7 @@ function make (mongoose) {
 
 	var sageJob2 = new Job ({
 		logo: "/images/sage-logo.png",
+		logoStyle: "margin-top: 15px; margin-right: 10px",
 		company: "Sage",
 		job: "Functional Manager",
 		url: "http://sage.fr",
@@ -84,6 +91,7 @@ function make (mongoose) {
 	sageJob1.save(function (err) {if (err) console.log ('Error on save!')});
 	ravenJob.save(function (err) {if (err) console.log ('Error on save!')});
 	sageJob2.save(function (err) {if (err) console.log ('Error on save!')});
-}
 
-module.exports.make = make;
+	return Job;
+}
+exports.make = make;
