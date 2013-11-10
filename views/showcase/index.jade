@@ -2,38 +2,23 @@ extend layout
 block content
  ul(class="tabs-content")
   li(class="active", id="ravenTab")
-   img(src="appscreens/r1.png")
-   br
-   hr
-   img(src="appscreens/r2.png")
-   br
-   hr
-   img(src="appscreens/r3.png")
+    each val in [1, 2, 3]
+      img(src="appscreens/r" + val +".png")
+      br
+      hr
   li(id="wayzupTab")
-   .one-third.column
-    img(src="appscreens/wz1.png")
-   .one-third.column
-    img(src="appscreens/wz2.png")
-   .one-third.column
-    img(src="appscreens/wz3.png")
+    each val in [1, 2, 3]
+      .one-third.column
+        img(src="appscreens/wz" + val +".png")
   li(id="myseeenTab")
-   .one-third.column
-    img(src="appscreens/ms1.png")
-   .one-third.column
-    img(src="appscreens/ms2.png")
-   .one-third.column
-    img(src="appscreens/ms3.png")
+    each val in [1, 2, 3]
+      .one-third.column
+        img(src="appscreens/ms" + val +".png")
   li(id="socialquestionsTab")
-   .one-third.column
-    img(src="appscreens/sq1.png")
-   .one-third.column
-    img(src="appscreens/sq2.png")
-   .one-third.column
-    img(src="appscreens/sq3.png")
-  li(class="active", id="redpinTab")
-   .one-third.column
-    img(src="appscreens/rp1.png")
-   .one-third.column
-    img(src="appscreens/rp2.png")
-   .one-third.column
-    img(src="appscreens/rp3.png")
+    each val in [1, 2, 3]
+      .one-third.column
+        img(src="appscreens/sq" + val +".png")
+  li(id="redpinTab")
+    each val in [1, 2, 3]
+      .one-third.column
+        img(src="appscreens/rp" + val +".png")
