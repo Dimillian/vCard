@@ -92,7 +92,9 @@ app.post('/login', function(req, res){
 					});
 				}
 				else {
-					var loggedUser = user ? user : null;
+					if (user) {
+						app.locals.loggedUser = user;
+					}
 					res.redirect('/');
 				}
 			});
