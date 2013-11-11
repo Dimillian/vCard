@@ -5,10 +5,13 @@ var stylus = require('stylus');
 var nib = require('nib');
 var mongoose = require ("mongoose");
 var app = express();
+app.use(express.bodyParser());
+app.locals.error = null;
+app.locals.loggedUser = null;
 
 var uristring =
-	process.env.MONGOLAB_URI ||
-	'mongodb://localhost/thomsricouardTimeline';
+process.env.MONGOLAB_URI ||
+'mongodb://localhost/thomasricouard';
 
 mongoose.connect(uristring, function (err, res) {
 	if (err) {
@@ -21,6 +24,9 @@ mongoose.connect(uristring, function (err, res) {
 var Job = require('./providers/jobProvider.js').JobProvider;
 var job = new Job();
 job.seed();
+
+var User = require('./providers/userProvider.js').UserProvider;
+var user = new User();
 
 
 function compile(str, path) {
@@ -38,23 +44,59 @@ app.use(stylus.middleware({
 	src: __dirname + '/public',
 	compile: compile,
 	compress: true
-	}
+}
 ));
 
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
 	job.findall(function(error, jobs){
-		res.render('index', {timeline: jobs})
+		res.render('index', {timeline: jobs});
 	});
 });
 
-app.get('/showcase.html', function (req, res) {
-	res.render('showcase/index', {})
+app.get('/showcase', function (req, res) {
+	res.render('showcase/index', {});
 });
 
-app.get('/login.html', function(req, res) {
- 	res.render('login', {})
+app.get('/login', function(req, res) {
+	res.render('login', {});
+});
+
+app.post('/login', function(req, res){
+	if (req.param('loginPost')) {
+		var username = req.param('username');
+		var password = req.param('password');
+		if (username && password) {
+			user.findByUsernameAndPassword(username, password,
+				function( error, user) {
+					if (user) {
+						app.locals.loggedUser = user;
+					}
+					res.redirect('/');
+				});
+		}
+		else {
+			res.status(400);
+			res.render('login', {
+				error: 'All fields are required'
+			});
+		}
+	}
+	else if (req.param('registerPost')) {
+		user.addUser(req.param('username'), req.param('password'),
+			function(err, user) {
+				if (err) {
+					res.render('login', {
+						error: err
+					});
+				}
+				else {
+					var loggedUser = user ? user : null;
+					res.redirect('/');
+				}
+			});
+	}
 });
 
 var port = process.env.PORT || 5000;

@@ -23,6 +23,8 @@ html
     link(rel='stylesheet', href='/css/skeleton/skeleton.css')
     link(rel='stylesheet', href='/css/custom.css')
   body
+    - if (loggedUser)
+    p= loggedUser
     .container
       include header
       include tabs

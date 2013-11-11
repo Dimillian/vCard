@@ -1,17 +1,18 @@
 var mongoose = require ("mongoose");
 var Job;
 
+var timelineSchema = new mongoose.Schema({
+	logo: {type: String, trim: true},
+	logoStyle: {type: String, trim: true},
+	company: {type: String, trim: true},
+	job: {type: String, trim: true},
+	url: {type: String, trim: true},
+	time: {type: String, trime: true},
+	order: {type: Number}
+});
+
 JobProvider = function() {
-	var timelineSchema = new mongoose.Schema({
-		logo: {type: String, trim: true},
-		logoStyle: {type: String, trim: true},
-		company: {type: String, trim: true},
-		job: {type: String, trim: true},
-		url: {type: String, trim: true},
-		time: {type: String, trime: true},
-		order: {type: Number}
-	});
-	Job = mongoose.model('thomasRicouardJob', timelineSchema);
+	Job = mongoose.model('job', timelineSchema);
 };
 
 JobProvider.prototype.seed = function() {

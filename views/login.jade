@@ -11,13 +11,17 @@ html
    .container
     h1= Login
     .two-third.column
+    - if (error)
+    p= error
      form( method="post")
       div
        div
         span Username :
-        input(type="text", name="login", id="loginUsername")
+        input(type="text", name="username", id="loginUsername")
        div
         span Password :
         input(type="password", name="password", id="loginPassword")
        div#loginSubmit
-        input(type="submit", value="Login")
+        input(type="submit", value="Login", name="loginPost")
+       div#registerSubmit
+        input(type="submit", value="Create user", name="registerPost")

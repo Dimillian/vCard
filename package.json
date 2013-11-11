@@ -8,7 +8,9 @@
     "nib": "*",
     "mongodb": "*",
     "mongoose": "*",
-    "newrelic": "*"
+    "newrelic": "*",
+    "marked": "*",
+    "bcrypt" : "*"
   },
   "engines": {
     "node": "0.10.x",
