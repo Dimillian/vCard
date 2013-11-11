@@ -42,7 +42,10 @@ UserProvider.prototype.findByUsernameAndPassword = function(username, password, 
 			});
 		}
 		else {
-			callback(err, null);
+			var error = ({
+				"message": "User not found"
+			});
+			callback(error, null);
 		}
 	});
 };

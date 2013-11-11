@@ -7,11 +7,13 @@ var mongoose = require ("mongoose");
 var app = express();
 app.use(express.bodyParser());
 app.locals.error = null;
-app.locals.loggedUser = null;
+app.use(express.cookieParser());
+app.use(express.session({secret: 'secretsession'}));
 
 var uristring =
 process.env.MONGOLAB_URI ||
 'mongodb://localhost/thomasricouard';
+
 
 mongoose.connect(uristring, function (err, res) {
 	if (err) {
@@ -44,10 +46,17 @@ app.use(stylus.middleware({
 	src: __dirname + '/public',
 	compile: compile,
 	compress: true
-}
+	}
 ));
 
 app.use(express.static(__dirname + '/public'));
+
+app.configure(function(){
+  app.use(function(req, res, next){
+    res.locals.user = req.session.user;
+    next();
+  });
+});
 
 app.get('/', function (req, res) {
 	job.findall(function(error, jobs){
@@ -70,10 +79,15 @@ app.post('/login', function(req, res){
 		if (username && password) {
 			user.findByUsernameAndPassword(username, password,
 				function( error, user) {
-					if (user) {
-						app.locals.loggedUser = user;
+					if (!error) {
+						req.session.user = user;
+						res.redirect('/');
 					}
-					res.redirect('/');
+					else {
+						res.render('login', {
+							error: error.message
+						});
+					}
 				});
 		}
 		else {
@@ -93,7 +107,7 @@ app.post('/login', function(req, res){
 				}
 				else {
 					if (user) {
-						app.locals.loggedUser = user;
+						req.session.user = user;
 					}
 					res.redirect('/');
 				}
