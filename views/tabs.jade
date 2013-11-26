@@ -7,3 +7,6 @@ ul(class="tabs")
   a(href="showcase") Screens
  li
   a(href="#contact") Contact
+ - if (user && user.role == 1)
+  li
+   a(href="admin") Admin

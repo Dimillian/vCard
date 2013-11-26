@@ -87,7 +87,7 @@ JobProvider.prototype.seed = function() {
 };
 
 JobProvider.prototype.findall = function(callback) {
-	Job.find({}).exec(function(err, result) {
+	Job.find().sort('order').exec(function(err, result) {
 		callback(err, result);
 	})
 };

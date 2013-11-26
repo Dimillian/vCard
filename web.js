@@ -11,9 +11,7 @@ app.use(express.cookieParser());
 app.use(express.session({secret: 'secretsession'}));
 
 var uristring =
-process.env.MONGOLAB_URI ||
-'mongodb://localhost/thomasricouard';
-
+process.env.MONGOLAB_URI || 'mongodb://localhost/thomasricouard';
 
 mongoose.connect(uristring, function (err, res) {
 	if (err) {
