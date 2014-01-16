@@ -28,7 +28,6 @@ job.seed();
 var User = require('./providers/userProvider.js').UserProvider;
 var user = new User();
 
-
 function compile(str, path) {
 	return stylus(str)
 	.set('filename', path)
