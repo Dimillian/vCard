@@ -1,0 +1,6 @@
+extend ../layout
+block content
+  h1 #{metas.title} - 
+    span.author= metas.author
+  span= metas.date
+  .post-content!= content
