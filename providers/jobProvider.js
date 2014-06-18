@@ -18,6 +18,16 @@ JobProvider = function() {
 JobProvider.prototype.seed = function() {
 	Job.remove(function (err) {if (err) console.log ('Error on remove!')});
 
+	var gloseJob = new Job ({
+		logo: "/images/glose.png",
+		logoStyle: "margin-top: 10px; margin-right: 25px; margin-left: 15px",
+		company: "Glose",
+		job: "Lead Mobile Developer",
+		url: "http://www.glose.com",
+		time: "Setember 2013 to now",
+		order: "0"
+	});
+
 	var mySeeenJob = new Job ({
 		logo: "/images/myseeen.png",
 		logoStyle: "margin-top: 10px; margin-right: 25px; margin-left: 15px",
@@ -25,7 +35,7 @@ JobProvider.prototype.seed = function() {
 		job: "Co-Founder, iOS Dev",
 		url: "http://www.myseeenapp.com",
 		time: "February 2012 to now",
-		order: "0"
+		order: "1"
 	});
 
 	var googleJob = new Job ({
@@ -35,7 +45,7 @@ JobProvider.prototype.seed = function() {
 		job: "iOS engineer",
 		url: "http://google.com",
 		time: "February 2013 to July 2013",
-		order: "1"
+		order: "2"
 	});
 
 	var wayzupJob = new Job ({
@@ -45,7 +55,7 @@ JobProvider.prototype.seed = function() {
 		job: "Mobile Development Manager",
 		url: "http://www.wayz-up.com",
 		time: "June 2012 to May 2013",
-		order: "2"
+		order: "3"
 	});
 
 	var sageJob1 = new Job ({
@@ -55,7 +65,7 @@ JobProvider.prototype.seed = function() {
 		job: "Mobile Technologies Developer",
 		url: "http://sage.fr",
 		time: "September 2011 to June 2012",
-		order: "3"
+		order: "4"
 	});
 
 	var ravenJob = new Job ({
@@ -65,7 +75,7 @@ JobProvider.prototype.seed = function() {
 		job: "Co-Founder, Lead Developer",
 		url: "http://raven.io",
 		time: "April 2011 to May 2012",
-		order: "4"
+		order: "5"
 	});
 
 	var sageJob2 = new Job ({
@@ -75,9 +85,10 @@ JobProvider.prototype.seed = function() {
 		job: "Functional Manager",
 		url: "http://sage.fr",
 		time: "2009 to August 2011",
-		order: "5"
+		order: "6"
 	});
 
+	gloseJob.save(function (err) {if (err) console.log ('Error on save!')});
 	mySeeenJob.save(function (err) {if (err) console.log ('Error on save!')});
 	googleJob.save(function (err) {if (err) console.log ('Error on save!')});
 	wayzupJob.save(function (err) {if (err) console.log ('Error on save!')});
