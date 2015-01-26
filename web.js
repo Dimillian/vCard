@@ -57,7 +57,15 @@ app.configure(function(){
 
 app.get('/', function (req, res) {
 	job.findall(function(error, jobs){
-		res.render('index', {timeline: jobs});
+		if (!jobs.length || error != null) {
+			job.seed();
+			job.findall(function(error, jobs){
+				res.render('index', {timeline: jobs});
+			});
+		}
+		else {
+			res.render('index', {timeline: jobs});
+		}
 	});
 });
 
